@@ -1,0 +1,14 @@
+GET http://localhost:8080/payments
+Accept: application/json
+
+###
+
+POST http://localhost:8080/payments
+Accept: application/json
+Content-Type: application/json
+
+{
+  "amount": 123,
+  "from": "me",
+  "to": "you"
+}
