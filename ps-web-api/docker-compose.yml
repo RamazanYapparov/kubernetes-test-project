@@ -1,18 +1,17 @@
 version: "3.8"
 
 services:
-  ps-api:
-    image: ps-api
+  ps-web-api:
+    image: ps-web-api
     ports:
     - "8080:8080"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
     depends_on:
       - mongodb
 
   mongodb:
     image: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
     ports:
     - "27017:27017"
     volumes:
