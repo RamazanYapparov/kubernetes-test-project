@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ps-webapp
+spec:
+  selector:
+    matchLabels:
+      app: ps-webapp
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: ps-webapp
+    spec:
+      containers:
+        - name: ps-webapp
+          image: waltorw/ps-webapp
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+          - mountPath: /etc/nginx/conf.d
+            name: nginx-config
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: ps-webapp-config 
+            items:
+              - key: nginx.conf
+                path: default.conf
+
+

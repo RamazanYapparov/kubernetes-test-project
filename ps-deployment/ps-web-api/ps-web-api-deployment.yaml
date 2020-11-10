@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ps-web-api
+spec:
+  selector:
+    matchLabels:
+      app: ps-web-api
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: ps-web-api
+    spec:
+      containers:
+        - name: ps-web-api
+          image: waltorw/ps-web-api
+          ports:
+          - containerPort: 8080
+            name: http
+          env:
+          - name: SPRING_DATA_MONGODB_HOST
+            value: ps-mongodb-svc
+          livenessProbe:
+              httpGet:
+                path: /payments
+                port: 8080
+          readinessProbe:
+              httpGet:
+                path: /payments
+                port: 8080
+              periodSeconds: 1
+              timeoutSeconds: 1
+              successThreshold: 1
+              failureThreshold: 10
+

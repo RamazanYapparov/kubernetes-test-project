@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ps-web-api-svc
+  labels:
+    app: ps-web-api-svc
+spec:
+  selector:
+    app: ps-web-api
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: http
+      name: http
+
+

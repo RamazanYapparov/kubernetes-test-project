@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ps-mongodb
+  labels:
+    app: ps-mongodb
+spec:
+  containers:
+  - name: ps-mongodb
+    image: mongo
+    volumeMounts:
+    - mountPath: /data/db
+      name: mongodb-data
+    ports:
+    - containerPort: 27017
+      name: mongodb
+      protocol: TCP
+  volumes:
+  - name: mongodb-data
+    persistentVolumeClaim:
+      claimName: ps-mongodb-pvc
+

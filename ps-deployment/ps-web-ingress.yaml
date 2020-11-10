@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ps-web-ingress
+spec:
+  backend:
+    serviceName: ps-webapp-lb
+    servicePort: http
+  rules:
+  - http:
+      paths:
+      - path: /payments
+        backend:
+          serviceName: ps-web-api-lb
+          servicePort: http
+    # host: "ps.com"
